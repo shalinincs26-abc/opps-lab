@@ -1,0 +1,69 @@
+
+package transaction;
+
+public class Account {
+    int accountNumber;
+    double balance;
+
+    public Account(int number, double amount) {
+        accountNumber = number;
+        balance = amount;
+    }
+
+    public void deposit(double amount) {
+        balance += amount;
+        System.out.println("Deposited: Rs." + amount);
+    }
+
+    public void withdraw(double amount) {
+        if (amount <= balance) {
+            balance -= amount;
+            System.out.println("Withdrawn: Rs." + amount);
+        } else {
+            System.out.println("Insufficient Balance");
+        }
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public int getAccountNumber() {
+        return accountNumber;
+    }
+}
+
+
+
+package reports;
+
+import transaction.Account;
+
+public class TransactionReport {
+    public void generateReport(Account a) {
+        System.out.println("\nTRANSACTION REPORT");
+        System.out.println("Account Number: " + a.getAccountNumber());
+        System.out.println("Current Balance: Rs." + a.getBalance());
+    }
+}
+
+
+
+import transaction.Account;
+import reports.TransactionReport;
+
+public class Main {
+    public static void main(String[] args) {
+
+        Account a = new Account(12345, 5000);
+
+        a.deposit(2000);
+        a.withdraw(1000);
+
+        TransactionReport r = new TransactionReport();
+        r.generateReport(a);
+
+        System.out.println("\nName: SHALINI N");
+        System.out.println("USN: 1BM26CS472-T");
+    }
+}
