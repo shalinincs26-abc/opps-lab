@@ -1,0 +1,59 @@
+
+import java.util.Scanner;
+
+class SeatAlreadyBookedException extends Exception {
+    SeatAlreadyBookedException(String message) {
+        super(message);
+    }
+}
+
+class Reservation {
+    boolean[] seats = new boolean[6];
+
+    void reserveSeat(int seatNumber)
+            throws SeatAlreadyBookedException {
+
+        if (seatNumber < 1 || seatNumber > 5) {
+            throw new IllegalArgumentException("Invalid Seat Number");
+        }
+
+        if (seats[seatNumber]) {
+            throw new SeatAlreadyBookedException(
+                "Seat Already Booked!"
+            );
+        }
+
+        seats[seatNumber] = true;
+        System.out.println("Seat " + seatNumber + " Reserved Successfully");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+        Reservation r = new Reservation();
+
+        try {
+            System.out.print("Enter Seat Number: ");
+            int seat = sc.nextInt();
+
+            r.reserveSeat(seat);
+
+        } catch (SeatAlreadyBookedException e) {
+            System.out.println(e.getMessage());
+
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+
+        } catch (java.util.InputMismatchException e) {
+            System.out.println("Incorrect User Input");
+
+        } finally {
+            System.out.println("Transaction Completed");
+            System.out.println("Name: SHALINI N");
+            System.out.println("USN: 1BM26CS472-T");
+            sc.close();
+        }
+    }
+}
